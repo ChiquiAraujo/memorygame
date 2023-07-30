@@ -1,4 +1,4 @@
-var grupoTarjetas = ["🦄", "🍦", "🌈", "👽", "👾", "🤖", "👹", "👺"];
+let grupoTarjetas = ["🦄", "🍦", "🌈", "👽", "👾", "🤖", "👹", "👺"];
 
 var totalTarjetas = grupoTarjetas.concat(grupoTarjetas);
 
@@ -19,7 +19,9 @@ function reparteTarjetas(){
         var tarjeta = document.createElement("div");
 
         tarjeta.innerHTML = 
-        "<div class='tarjeta'>" +
+        "<div class='tarjeta' data-valor=" +
+            elemento + 
+            ">" +
             "<div class='tarjeta__contenido'> "+
             elemento +
             "</div>" +
@@ -30,7 +32,25 @@ function reparteTarjetas(){
 }
 
 function descubrir() {
+    var descubiertas;
+    var totalDescubiertas = document.querySelectorAll(".descubierta");
+    
+    if (totalDescubiertas.length > 1 ){
+       return;
+    }
+
     this.classList.add("descubierta");
+
+    descubiertas = document.querySelectorAll(".descubierta");
+    if (descubiertas.length < 2 ){
+        return;
+     }
+
+     if  (descubiertas[0].dataset.valor === descubiertas[1].dataset.valor){
+        console.log("Bien");
+     }else{
+        console.log("Mal");
+     }
 }
 
 reparteTarjetas()
