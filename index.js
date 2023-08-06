@@ -1,4 +1,4 @@
-let grupoTarjetas = ["🦄", "🍦", "🌈", "👽", "👾", "🤖", "👹", "👺"];
+let grupoTarjetas = ["🦄", "🍦", "🌈", "👽", "👾", "🤖", "👹", "👺"]; //, 
 
 var totalTarjetas = grupoTarjetas.concat(grupoTarjetas);
 
@@ -33,7 +33,7 @@ function reparteTarjetas(){
 
 function descubrir() {
     var descubiertas;
-    var totalDescubiertas = document.querySelectorAll(".descubierta");
+    var totalDescubiertas = document.querySelectorAll(".descubierta:not(.acertada)");
     
     if (totalDescubiertas.length > 1 ){
        return;
@@ -41,16 +41,31 @@ function descubrir() {
 
     this.classList.add("descubierta");
 
-    descubiertas = document.querySelectorAll(".descubierta");
+    descubiertas = document.querySelectorAll(".descubierta:not(.acertada)");
     if (descubiertas.length < 2 ){
         return;
-     }
+     }     
+    comparar(descubiertas);
+}
 
-     if  (descubiertas[0].dataset.valor === descubiertas[1].dataset.valor){
-        console.log("Bien");
+function comparar(tarjetasAComparar) {
+    if  (tarjetasAComparar[0].dataset.valor === tarjetasAComparar[1].dataset.valor){
+        acierto (tarjetasAComparar);
      }else{
-        console.log("Mal");
+        error(tarjetasAComparar);
      }
+}
+
+function acierto (lasTarjetas) {
+    lasTarjetas.forEach(function(elemento){
+        elemento.classList.add("acertada");
+    });
+}
+
+function error (lasTarjetas) {
+    lasTarjetas.forEach(function(elemento){
+        elemento.classList.remove("descubierta");
+    });
 }
 
 reparteTarjetas()
