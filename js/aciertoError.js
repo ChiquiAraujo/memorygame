@@ -16,5 +16,3 @@ function error (lasTarjetas) {
         });
     }, 1000);
 }
-
-
